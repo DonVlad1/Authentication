@@ -7,8 +7,7 @@ exports.addUser = async (req, res) =>
     try
     {
         const newUser = new User(req.body)
-        console.log(newUser)
-        //await newUser.save()
+        await newUser.save()
         res.status(201).send({ user: newUser.name })
 
     }
