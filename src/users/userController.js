@@ -7,8 +7,7 @@ exports.addUser = async (req, res) =>
     try
     {
         const newUser = new User(req.body)
-        const token = await newUser.generateAuthToken()
-
+        const token = newUser.generateAuthToken()
         await newUser.save()
         res.status(201).send({ user: newUser.name, token })
 
@@ -32,7 +31,8 @@ exports.login = async (req, res) =>
     try
     {
         const user = await User.findByCredentials(email, password)
-        res.status(200).send({ user: user.name })
+        const token = user.generateAuthToken
+        res.status(200).send({ user: user.name, token })
     } catch (error)
     {
         res.status(400).send({ error: error.message })
