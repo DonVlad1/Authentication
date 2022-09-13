@@ -12,6 +12,4 @@ movieRouter.delete("/movie", [tokenCheck], movieDeleteOne)
 movieRouter.put("/movie", [tokenCheck], movieEdit)
 
 
-
-
 module.exports = movieRouter;

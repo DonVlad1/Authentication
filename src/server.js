@@ -1,12 +1,13 @@
 const express = require("express")
 require("./db/connection");
+const cors = require("cors")
 const userRouter = require("./users/userRoutes")
 const { tokenCheck } = require("./middleware")
 const movieRouter = require("./movie/movieRouter")
-
 const app = express()
 const port = process.env.PORT || 3002
 
+app.use(cors())
 app.use(express.json())
 app.use(movieRouter)
 app.use(userRouter)
