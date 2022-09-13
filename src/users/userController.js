@@ -7,7 +7,7 @@ exports.listUser = async (req, res) =>
         res.status(200).send(await User.find({}))
     } catch (error)
     {
-        console.log("Failed to list items")
+        res.status(500).send(console.log("Failed to list items"))
         console.log(error)
     }
 
@@ -20,24 +20,26 @@ exports.userDeleteOne = async (req, res) =>
     {
         await User.deleteOne({ name: req.body.name, email: req.body.email, password: req.body.password })
         res.status(200).send(await User.find({}))
-    } catch (error)
+    }
+    catch (error)
     {
 
-        res.status(200).send(console.log("Failed to list items"))
+        res.status(500).send(console.log("Failed to list items"))
         console.log(error)
     }
 
 }
 
-exports.movieEdit = async (req, res) =>
+exports.userEdit = async (req, res) =>
 {
     try
     {
-        await Movies.updateOne({ title: req.body.title, actor: req.body.actor }, { title: req.body.titleR, actor: req.body.actorR })
-        res.status(200).send(await Movies.find({}))
-    } catch (error)
+        await User.updateOne({ name: req.body.name, email: req.body.email }, { name: req.body.nameR, email: req.body.emailR })
+        res.status(200).send(await User.find({}))
+    }
+    catch (error)
     {
-        res.status(200).send(console.log("Failed to list items"))
+        res.status(500).send(console.log("Failed to list items"))
         console.log(error)
     }
 }
